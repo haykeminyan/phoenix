@@ -1,3 +1,4 @@
-phoenix-api/.idea
-phoenix-ui/.idea
-phoenix-ui/node_modules
+./phoenix-api/.idea
+./phoenix-ui/.idea
+./phoenix-ui/node_modules
+./phoenix-api/phoenix/.env
