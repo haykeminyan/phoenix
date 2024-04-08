@@ -35,7 +35,7 @@ services:
       - db-test
     working_dir: /usr/src/app/phoenix-api
 
-  web:
+  phoenix-api:
     build:
       context: .
       dockerfile: phoenix-api/Dockerfile
@@ -48,6 +48,29 @@ services:
       - db
     working_dir: /usr/src/app/phoenix-api
 
+
+  phoenix-ui:
+    build:
+      context: .
+      dockerfile: phoenix-ui/Dockerfile
+    ports:
+      - '4200:4200'
+    volumes:
+      - ./phoenix-ui/dist/phoenix-ui:/var/www/html
+      - ./nginx/nginx.conf:/etc/nginx/sites-available/default
+      - ./letsencrypt:/etc/letsencrypt
+    depends_on:
+      - phoenix-api
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "8100:80"
+      - "8443:443"
+    depends_on:
+      - phoenix-api
 
 volumes:
   postgres_data:

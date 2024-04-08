@@ -2,7 +2,7 @@ import pytest
 from fastapi import Request
 from fastapi.testclient import TestClient
 
-from phoenix.main import add_process_time_header, raw_body_middleware
+from phoenix.main import add_process_time_header
 
 
 def test__exist_add_process_time_header(client: TestClient):

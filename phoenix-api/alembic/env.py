@@ -10,8 +10,6 @@ import phoenix.models
 from alembic import context
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + ROOT_APP
-print(BASE_DIR)
-print('!'*100)
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 sys.path.append(BASE_DIR)
 # this is the Alembic Config object, which provides

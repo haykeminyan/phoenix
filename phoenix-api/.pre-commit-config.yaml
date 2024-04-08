@@ -5,7 +5,7 @@ repos:
     hooks:
       # Automatically add trailing commas to calls and literals.
       - id: add-trailing-comma
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
   # Black is a Python code formatter and ensures that our code is consistently formatted.
   - repo: https://github.com/ambv/black
@@ -17,15 +17,15 @@ repos:
           --skip-string-normalization, # black is opinionated towards "" strings by default, skip that check
           --line-length=99
         ]
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
   # Isort is a Python utility to sort imports accordingly to PEP-8
   - repo: https://github.com/pycqa/isort
     rev: 5.12.0
     hooks:
       - id: isort
-        args: [ "--settings-path=.isort.cfg" ]
-        exclude: lib/|bin/|cerberus-ui/
+        args: [ "--settings-path=phoenix-api/.isort.cfg" ]
+        exclude: lib/|bin/|phoenix-ui/
 
   # Some out-of-the-box hooks for pre-commit
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -33,31 +33,31 @@ repos:
     hooks:
       # Simply check whether files parse as valid python.
       - id: check-ast
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Checks for a common error of placing code before the docstring.
       - id: check-docstring-first
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Check for debugger imports and py37+ breakpoint() calls in python source.
       - id: debug-statements
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Prevent addition of new git submodules.
       - id: forbid-new-submodules
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Replaces or checks mixed line ending.
       - id: mixed-line-ending
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Trims trailing whitespace.
       - id: trailing-whitespace
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Makes sure files end in a newline and only a newline.
       - id: end-of-file-fixer
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # # Assert that files in tests/ match test*.py.
       # - id: name-tests-test
@@ -65,36 +65,36 @@ repos:
 
       #  Prevent giant files from being committed (default=500kB).
       - id: check-added-large-files
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Check for files with names that would conflict on a case-insensitive filesystem like MacOS HFS+ or Windows FAT.
       - id: check-case-conflict
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Check for files that contain merge conflict strings.
       - id: check-merge-conflict
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Checks for symlinks which do not point to anything.
       - id: check-symlinks
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Replaces double quoted strings with single quoted strings.
       - id: double-quote-string-fixer
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Remove # -*- coding: utf-8 -*- to the top of python files.
       - id: fix-encoding-pragma
         args: [--remove]
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Ensures that links to vcs websites are permalinks.
       - id: check-vcs-permalinks
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Attempts to load all json files to verify syntax.
       - id: check-json
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       #  Protect specific branches from direct checkins.
       - id: no-commit-to-branch
@@ -102,7 +102,7 @@ repos:
           -b dev,
           -b master
         ]
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Checks that all your JSON files are "pretty".
       - id: pretty-format-json
@@ -111,15 +111,15 @@ repos:
           --no-sort-keys,
           --no-ensure-ascii
         ]
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Attempts to load all yaml files to verify syntax.
       - id: check-yaml
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
       # Sorts simple YAML files which consist only of top-level keys, preserving comments and blocks.
       - id: sort-simple-yaml
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
   - repo: https://github.com/pycqa/flake8
     rev: 3.8.3
@@ -132,11 +132,11 @@ repos:
           --ignore=** W503
           --ignore=**/__init__.py F401 F403
         ]
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
 
   - repo: https://github.com/PyCQA/autoflake
     rev: v2.2.1
     hooks:
       - id: autoflake
         args: [ --remove-all-unused-imports, --in-place ]
-        exclude: lib/|bin/|cerberus-ui/
+        exclude: lib/|bin/|phoenix-ui/
