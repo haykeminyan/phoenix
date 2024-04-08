@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residence</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-light">
+
+<section id="residence" class="dark: bg-dark">
+  <div class="container my-5 py-5">
+    <h2 class="text-capitalize m-0 py-lg-5">Popular Residence</h2>
+
+    <!-- Living Area Filter -->
+    <form (ngSubmit)="onFilterChange('livingArea')">
+      <div class="dropdown" id="livingAreaFilter" style="float:left;">
+        <button class="dropbtn" #livingAreaFilterButton>Living area filter:</button>
+        <div class="dropdown-content" [ngClass]="{'show': isDropdownVisible}" #dropdownContent >
+          <section class="example-section">
+            <mat-slider min="0" max="1000" step="10" showTickMarks="" discrete="" [displayWith]="formatLabelLivingArea" [disabled]="isLivingAreaValue">
+              <input value="0" id="livingAreaMin" matSliderStartThumb name="living_area__gte" [(ngModel)]="livingAreaMin">
+              <input value="0" id="livingAreaMax" matSliderEndThumb name="living_area__lte" [(ngModel)]="livingAreaMax">
+            </mat-slider>
+            <mat-form-field class="example-margin example-width">
+              <mat-label>Value</mat-label>
+              <input matInput type="string" id="livingArea" name="living_area" [(ngModel)]="livingArea" [disabled]="isLivingAreaSlider" (focus)="toggleDropdown(true)" (blur)="toggleDropdown(false)">
+            </mat-form-field>
+            <button mat-stroked-button class="btn btn-info" type="submit">Submit</button>
+            <button mat-stroked-button class="btn btn-warning" id='resetLivingArea' type="reset"  (click)="resetSlider('livingArea')">Reset</button>
+          </section>
+        </div>
+      </div>
+    </form>
+
+    <!-- Rent Price Filter -->
+    <form (ngSubmit)="onFilterChange('rentPrice')">
+      <div class="dropdown" id="rentPriceFilter" style="float:left;">
+        <button class="dropbtn">Rent Price filter:</button>
+        <div class="dropdown-content">
+          <section class="example-section">
+            <mat-slider min="0" max="10000" step="50" showTickMarks="" discrete="" [displayWith]="formatLabelRentPrice" [disabled]="isRentPrice">
+              <input value="0" id="rentPriceMin" matSliderStartThumb name="rent_price__gte" [(ngModel)]="rentPriceMin">
+              <input value="0" id="rentPriceMax" matSliderEndThumb name="rent_price__lte" [(ngModel)]="rentPriceMax">
+            </mat-slider>
+            <mat-form-field class="example-margin example-width">
+              <mat-label>Value</mat-label>
+              <input matInput type="string" id="rentPrice" name="rent_price" [(ngModel)]="rentPrice">
+            </mat-form-field>
+            <button mat-stroked-button class="btn btn-info" type="submit">Submit</button>
+            <button mat-stroked-button class="btn btn-warning" type="reset"  (click)="resetSlider('rentPrice')">Reset</button>
+          </section>
+        </div>
+      </div>
+    </form>
+
+    <!-- Number of Bedrooms Filter -->
+    <form (ngSubmit)="onFilterChange('numberOfBedrooms')">
+      <div class="dropdown" id="numberOfBedroomsFilter">
+        <button class="dropbtn">Number of Bedrooms filter:</button>
+        <div class="dropdown-content">
+          <section class="example-section">
+            <mat-slider min="0" max="20" step="1" showTickMarks="" discrete="" [disabled]="isNumberOfBedrooms">
+              <input value="0" id="numberOfBedroomsMin" matSliderStartThumb name="number_of_bedrooms__gte" [(ngModel)]="numberOfBedroomsMin">
+              <input value="0" id="numberOfBedroomsMax" matSliderEndThumb name="number_of_bedrooms__lte" [(ngModel)]="numberOfBedroomsMax">
+            </mat-slider>
+            <mat-form-field class="example-margin example-width">
+              <mat-label>Value</mat-label>
+              <input matInput type="string" id="numberOfBedrooms" name="number_of_bedrooms" [(ngModel)]="numberOfBedrooms">
+            </mat-form-field>
+            <button mat-stroked-button class="btn btn-info" type="submit">Submit</button>
+            <button mat-stroked-button class="btn btn-warning" type="button" (click)="resetFilters()">Reset</button>
+          </section>
+        </div>
+      </div>
+    </form>
+<!--    <button mat-stroked-button class="btn btn-danger" type="button" (click)="resetFilters()">Reset all filters</button>-->
+    <div class="swiper residence-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-6" *ngFor="let dossier of dossiers">
+                    <div class="card">
+                      <img class="card-img-top" src="{{ 'http://127.0.0.1:8000/' + dossier.image.replace('{', '').replace('}', '') }}" alt="image">
+                      <div class="card-body">
+                        <ul class="list-unstyled">
+                          <li><a [routerLink]="['../view-apartment-rent']" [queryParams]="{id:dossier.id}" class="text-light">View</a></li>
+                          <li>Living Area: {{dossier.living_area}} m2</li>
+                          <li>Bedrooms: {{dossier.number_of_bedrooms}}</li>
+                          <li>Bathrooms: {{dossier.number_of_bathrooms}}</li>
+                          <li>Condition: {{dossier.condition}}</li>
+                          <li>Latitude: {{dossier.latitude}}</li>
+                          <li>Longitude: {{dossier.longitude}}</li>
+                          <li>Address: {{dossier.address}}</li>
+                          <li>Rent Price: {{dossier.rent_price}} EUR</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+            </div>
+          </div>
+          <!--        </div>-->
+          <!--        <div class="swiper-slide">-->
+          <!--          <div class="card">-->
+          <!--            <a href="property-single.html"><img src="assets/templatesForListing/images/item16.png" class="card-img-top" alt="image"></a>-->
+          <!--            <div class="card-body p-0">-->
+          <!--              <a href="property-single.html">-->
+          <!--                <h5 class="card-title pt-4">Aliva Priva Jalvin</h5>-->
+          <!--              </a>-->
+          <!--              <p class="card-text">1087 Pin Oak Drive, Clinton, USA</p>-->
+
+          <!--              <div class="card-text">-->
+          <!--                <ul class="d-flex">-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bed.png" alt="image"> 4 bed</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bath.png" alt="image"> 2 bath</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/square.png" alt="image"> 1203 Sqft.</li>-->
+          <!--                </ul>-->
+          <!--              </div>-->
+
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--        <div class="swiper-slide">-->
+          <!--          <div class="card">-->
+          <!--            <a href="property-single.html"><img src="assets/templatesForListing/images/item17.png" class="card-img-top" alt="image"></a>-->
+          <!--            <div class="card-body p-0">-->
+          <!--              <a href="property-single.html">-->
+          <!--                <h5 class="card-title pt-4">Aliva Priva Jalvin</h5>-->
+          <!--              </a>-->
+          <!--              <p class="card-text">1087 Pin Oak Drive, Clinton, USA</p>-->
+
+          <!--              <div class="card-text">-->
+          <!--                <ul class="d-flex">-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bed.png" alt="image"> 4 bed</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bath.png" alt="image"> 2 bath</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/square.png" alt="image"> 1203 Sqft.</li>-->
+          <!--                </ul>-->
+          <!--              </div>-->
+
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--        <div class="swiper-slide">-->
+          <!--          <div class="card">-->
+          <!--            <a href="property-single.html"><img src="assets/templatesForListing/images/item1.jpg" class="card-img-top" alt="image"></a>-->
+          <!--            <div class="card-body p-0">-->
+          <!--              <a href="property-single.html">-->
+          <!--                <h5 class="card-title pt-4">Aliva Priva Jalvin</h5>-->
+          <!--              </a>-->
+          <!--              <p class="card-text">1087 Pin Oak Drive, Clinton, USA</p>-->
+
+          <!--              <div class="card-text">-->
+          <!--                <ul class="d-flex">-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bed.png" alt="image"> 4 bed</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bath.png" alt="image"> 2 bath</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/square.png" alt="image"> 1203 Sqft.</li>-->
+          <!--                </ul>-->
+          <!--              </div>-->
+
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--        <div class="swiper-slide">-->
+          <!--          <div class="card">-->
+          <!--            <a href="property-single.html"><img src="assets/templatesForListing/images/item2.jpg" class="card-img-top" alt="image"></a>-->
+          <!--            <div class="card-body p-0">-->
+          <!--              <a href="property-single.html">-->
+          <!--                <h5 class="card-title pt-4">Aliva Priva Jalvin</h5>-->
+          <!--              </a>-->
+          <!--              <p class="card-text">1087 Pin Oak Drive, Clinton, USA</p>-->
+
+          <!--              <div class="card-text">-->
+          <!--                <ul class="d-flex">-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bed.png" alt="image"> 4 bed</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bath.png" alt="image"> 2 bath</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/square.png" alt="image"> 1203 Sqft.</li>-->
+          <!--                </ul>-->
+          <!--              </div>-->
+
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--        <div class="swiper-slide">-->
+          <!--          <div class="card">-->
+          <!--            <a href="property-single.html"><img src="assets/templatesForListing/images/item3.jpg" class="card-img-top" alt="image"></a>-->
+          <!--            <div class="card-body p-0">-->
+          <!--              <a href="property-single.html">-->
+          <!--                <h5 class="card-title pt-4">Aliva Priva Jalvin</h5>-->
+          <!--              </a>-->
+          <!--              <p class="card-text">1087 Pin Oak Drive, Clinton, USA</p>-->
+
+          <!--              <div class="card-text">-->
+          <!--                <ul class="d-flex">-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bed.png" alt="image"> 4 bed</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bath.png" alt="image"> 2 bath</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/square.png" alt="image"> 1203 Sqft.</li>-->
+          <!--                </ul>-->
+          <!--              </div>-->
+
+          <!--            </div>-->
+          <!--          </div>-->
+          <!--        </div>-->
+          <!--        <div class="swiper-slide">-->
+          <!--          <div class="card">-->
+          <!--            <a href="property-single.html"><img src="assets/templatesForListing/images/item4.jpg" class="card-img-top" alt="image"></a>-->
+          <!--            <div class="card-body p-0">-->
+          <!--              <a href="property-single.html">-->
+          <!--                <h5 class="card-title pt-4">Aliva Priva Jalvin</h5>-->
+          <!--              </a>-->
+          <!--              <p class="card-text">1087 Pin Oak Drive, Clinton, USA</p>-->
+
+          <!--              <div class="card-text">-->
+          <!--                <ul class="d-flex">-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bed.png" alt="image"> 4 bed</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/bath.png" alt="image"> 2 bath</li>-->
+          <!--                  <li class="residence-list"> <img src="assets/templatesForListing/images/square.png" alt="image"> 1203 Sqft.</li>-->
+          <!--                </ul>-->
+          <!--              </div>-->
+
+          <!--            </div>-->
+        </div>
+      </div>
+      <!---->
+    </div>
+
+
+
+
+    <!--    </div>-->
+
+  </div>
+</section>
+</body>
+</html>

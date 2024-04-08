@@ -1,0 +1,32 @@
+fastapi==0.109.2
+psycopg2-binary==2.9.6
+sqlmodel==0.0.14
+uvicorn==0.22.0
+python-dotenv==1.0.0
+alembic==1.13.1
+FastAPI-SQLAlchemy==0.2.1
+fastapi-pagination==0.12.14
+sqladmin==0.16.0
+itsdangerous==2.1.2
+requests==2.31.0
+fastapi-jwt==0.2.0
+passlib==1.7.4
+python-jose==3.3.0
+pytz==2024.1
+pydantic==2.6.0
+pydantic[email]
+pytest==8.0.0
+coverage==7.4.1
+password-strength==0.0.3.post2
+httpx==0.26.0
+multi-file-converter==1.0.9
+python-multipart==0.0.9
+SQLAlchemy-Utils==0.41.1
+python-docx==1.0.1
+Random-Word==1.0.11
+pytest-mock==3.12.0
+pytest-asyncio==0.23.5
+sentry-sdk[fastapi]
+fastapi-filter[sqlalchemy]
+# arcgis
+# keyrings.alt
