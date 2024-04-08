@@ -22,25 +22,31 @@ services:
       - "5434:5432"
 
   test:
-    build: .
+    build:
+      context: .
+      dockerfile: phoenix-api/Dockerfile
     volumes:
-      - .:/phoenix
+      - ./phoenix-api:/usr/src/app/phoenix-api
     command: >
-       bash -c "./scripts/wait-for-it.sh db-test:5432  && alembic upgrade head && pytest -v;sleep infinity"
+       bash -c "/usr/src/app/phoenix-api/scripts/wait-for-it.sh db-test:5432  && alembic upgrade head && pytest -v;sleep infinity"
     links:
       - db-test:db
     depends_on:
       - db-test
+    working_dir: /usr/src/app/phoenix-api
 
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: phoenix-api/Dockerfile
     command: bash -c "alembic upgrade head && uvicorn phoenix.main:app --host 0.0.0.0 --port 8000 --reload"
     volumes:
-      - .:/phoenix
+      - ./phoenix-api:/usr/src/app/phoenix-api
     ports:
       - "8000:8000"
     depends_on:
       - db
+    working_dir: /usr/src/app/phoenix-api
 
 
 volumes:

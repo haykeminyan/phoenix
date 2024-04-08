@@ -1,4 +1,4 @@
-ROOT_APP = '/phoenix'
+ROOT_APP = 'phoenix-api/phoenix'
 CREATE_USER_URL = 'http://127.0.0.1:8000/create_user'
 TEST_EMAIL = 'admin@gmail.com'
 TEST_PASSWORD = '@#$%Rewtegmfwep1!&$^'

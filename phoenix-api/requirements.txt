@@ -2,7 +2,7 @@ fastapi==0.109.2
 psycopg2-binary==2.9.6
 sqlmodel==0.0.14
 uvicorn==0.22.0
-python-dotenv==1.0.0
+python-dotenv==1.0.1
 alembic==1.13.1
 FastAPI-SQLAlchemy==0.2.1
 fastapi-pagination==0.12.14
