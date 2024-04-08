@@ -2,3 +2,4 @@
 ./phoenix-ui/.idea
 ./phoenix-ui/node_modules
 ./phoenix-api/phoenix/.env
+./nginx/cert
