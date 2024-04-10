@@ -52,4 +52,13 @@ export class PhoenixService {
     return this.http.get<HttpResponse<any>>(url, { observe: 'response' });
   }
 
+  createApartmentRent(apartmentData: any, file: File | undefined): Observable<HttpResponse<HttpResponse<any>>> {
+    const url = 'http://127.0.0.1:8000/apartment-rent';
+    const formData = new FormData();
+    formData.append('apartment', JSON.stringify(apartmentData));
+    if (file) {
+      formData.append('files', file, file.name);
+    }
+    return this.http.post<HttpResponse<any>>(url, formData, { observe: 'response' })
+  }
 }

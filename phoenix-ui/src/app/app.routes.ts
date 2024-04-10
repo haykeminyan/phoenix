@@ -6,6 +6,7 @@ import {ApartmentSaleComponent} from "./components/apartment-sale/apartment-sale
 import {HouseRentComponent} from "./components/house-rent/house-rent.component";
 import {HouseSaleComponent} from "./components/house-sale/house-sale.component";
 import {ViewApartmentRentComponent} from "./components/view-apartment-rent/view-apartment-rent.component";
+import {CreateApartmentRentComponent} from "./components/create-apartment-rent/create-apartment-rent.component";
 
 export const routes: Routes = [
   { path: 'list', component: ListingComponent},
@@ -15,4 +16,5 @@ export const routes: Routes = [
   {path: 'house-rent', component: HouseRentComponent},
   {path: 'house-sale', component: HouseSaleComponent},
   {path: 'view-apartment-rent', component:ViewApartmentRentComponent},
+  {path: 'create-apartment-rent', component:CreateApartmentRentComponent},
 ];
