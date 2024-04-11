@@ -1,3 +1,45 @@
-/*.mb-6 {*/
-/*  margin-bottom: 1.5rem !important;*/
+.reset {
+  position: relative;
+  left: 15px;
+}
+input.ng-invalid.ng-touched {
+  border: red 1px solid;
+}
+input.ng-touched {
+  border: red 1px solid;
+}
+.max-w-lg {
+  max-width: 38rem;
+}
+input.ng-touched {
+  display: block;
+}
+input{
+  background-color: rgb(58, 63, 66);
+}
+/*button.send-btn:disabled {*/
+/*  background-color: #d1d5db; !* Light gray color for disabled state *!*/
+/*  cursor: not-allowed; !* Show not-allowed cursor *!*/
+/*  opacity: 0.5; !* Reduce opacity for a faded look *!*/
 /*}*/
+
+html{
+  color-scheme: dark !important;
+}
+.text-gray-700 {
+  --darkreader-text--tw-text-opacity: 1;
+  color: rgb(189, 183, 175);
+}
+label.text-sm {
+  color: var(--body-text-color);
+}
+.border-gray-900\/25 {
+  border-color: rgba(131, 121, 107, 0.25);
+}
+.mt-4 {
+  display: revert;
+}
+.bg-gray-200 {
+  --darkreader-bg--tw-bg-opacity: 1;
+  background-color: rgba(131, 121, 107, 0.25);
+}
