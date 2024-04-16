@@ -70,7 +70,7 @@ body, html {
   display: none;
   position: absolute;
   right: 0;
-  background-color: #f9f9f9;
+  background-color: darkgray;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -108,12 +108,31 @@ button.btn {
   width: 90px;
   left: 10px;
 }
-.btn-info{
-  width: 90px;
+.btn-info, .btn-warning{
+  max-width: 80px;
   /*left: 10px;*/
 }
 
 #rentPriceFilter{
   position: relative;
-  left: 10px;
+  left: 20px;
+}
+
+#numberOfBedroomsFilter{
+  position: relative;
+  left: 40px;
+}
+
+.max-w-lg {
+  max-width: 80rem;
+}
+.swiper{
+  width: 85%; /* Set a specific width for the element */
+  margin: 0 auto;
+}
+.btn-info{
+  width: 160px;
+}
+.dropbtn{
+  background-color: blueviolet;
 }

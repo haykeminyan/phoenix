@@ -57,7 +57,6 @@ export class CreateApartmentRentComponent implements OnInit{
       return;
     }
 console.log(this.form.get('number_of_bedrooms'))
-
     this.service.createApartmentRent(this.form.value, this.file).subscribe({
         next: (result: any) => {
           alert('Congratulations! You have created dossier!')

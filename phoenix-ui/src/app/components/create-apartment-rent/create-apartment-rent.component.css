@@ -5,9 +5,7 @@
 input.ng-invalid.ng-touched {
   border: red 1px solid;
 }
-input.ng-touched {
-  border: red 1px solid;
-}
+
 .max-w-lg {
   max-width: 38rem;
 }
