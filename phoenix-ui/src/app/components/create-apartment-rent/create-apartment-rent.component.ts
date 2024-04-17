@@ -1,7 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators
+} from "@angular/forms";
 import {PhoenixService} from "../../services/phoenix.service";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 import {Router} from "@angular/router";
 import {CommonModule, NgIf} from "@angular/common";
 
@@ -24,16 +30,43 @@ export class CreateApartmentRentComponent implements OnInit{
               protected router: Router,) {
 
       this.form = new FormGroup({
-        living_area: new FormControl('', [Validators.required, Validators.min(1)]),
-        number_of_bedrooms: new FormControl(null, Validators.min(0)),
-        number_of_bathrooms: new FormControl(null, Validators.min(0)),
-        building_year: new FormControl(null),
+        living_area: new FormControl('', [Validators.required, this.numericValidator]),
+        number_of_bedrooms: new FormControl(null, this.numericValidator),
+        number_of_bathrooms: new FormControl(null, this.numericValidator),
+        building_year: new FormControl(null, this.buildingYearValidator),
         address: new FormControl('', Validators.required),
         condition: new FormControl('good'),
-        energy_label: new FormControl(null),
-        rent_price: new FormControl('', [Validators.required, Validators.min(100)]),
+        energy_label: new FormControl('a_plus_plus'),
+        rent_price: new FormControl('', [Validators.required, this.numericValidator]),
         file: new FormControl('')
     })
+  }
+
+  numericValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value
+
+    // Regular expression for validating numeric input
+    const numericPattern = /^-?\d+$/;
+
+    // Check if the value matches the numeric pattern
+    if (!numericPattern.test(value) || Number(value) < 0) {
+      return { numeric: true };
+    }
+    return null
+
+  }
+
+  buildingYearValidator(control: AbstractControl): ValidationErrors | null {
+    const value = control.value
+
+    // Regular expression for validating numeric input
+    const numericPattern = /^-?\d+$/;
+    // Check if the value matches the numeric pattern
+    if (!numericPattern.test(value) || Number(value) < 1700) {
+      return { year: true };
+    }
+    return null
+
   }
 
 
@@ -56,7 +89,7 @@ export class CreateApartmentRentComponent implements OnInit{
     if (this.form.invalid) {
       return;
     }
-console.log(this.form.get('number_of_bedrooms'))
+
     this.service.createApartmentRent(this.form.value, this.file).subscribe({
         next: (result: any) => {
           alert('Congratulations! You have created dossier!')

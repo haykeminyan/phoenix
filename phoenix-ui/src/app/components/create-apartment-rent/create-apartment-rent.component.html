@@ -29,7 +29,7 @@
           class="appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500"
           type="number"
         />
-        <div *ngIf="form.get('living_area')?.touched && form.get('living_area')?.hasError('required')">
+        <div *ngIf="form.get('living_area')?.touched && form.get('living_area')?.hasError('numeric')">
           <small class="dark:text-red-500">Fill your living area (m²).</small>
         </div>
       </div>
@@ -42,7 +42,7 @@
           Number of Bathrooms
         </label>
         <input formControlName="number_of_bathrooms" name="number_of_bathrooms" class="appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500" type="number">
-        <div *ngIf="form.get('number_of_bathrooms')?.touched">
+        <div *ngIf="form.get('number_of_bathrooms')?.touched && form.get('number_of_bathrooms')?.hasError('numeric')">
           <small class="dark:text-red-500"> fill your real number.</small>
         </div>
       </div>
@@ -55,7 +55,7 @@
           Number of Bedrooms
         </label>
         <input formControlName="number_of_bedrooms" name="number_of_bedrooms" class="appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500" type="number">
-        <div *ngIf="form.get('number_of_bedrooms')?.touched && form.get('number_of_bedrooms')?.hasError('type')">
+        <div *ngIf="form.get('number_of_bedrooms')?.touched && form.get('number_of_bedrooms')?.hasError('numeric')">
           <small class="dark:text-red-500"> fill your real number.</small>
         </div>
       </div>
@@ -68,7 +68,7 @@
           Rent price
         </label>
         <input formControlName="rent_price" name="rent_price" class="appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500" type="number">
-        <div *ngIf="form.get('rent_price')?.touched && form.get('rent_price')?.hasError('required')">
+        <div *ngIf="form.get('rent_price')?.touched && form.get('rent_price')?.hasError('numeric')">
           <small class="dark:text-red-500"> fill your real rent price (€).</small>
         </div>
       </div>
@@ -81,7 +81,7 @@
           Building Year
         </label>
         <input formControlName="building_year" name="building_year" class="appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500" type="number">
-        <div *ngIf="form.get('building_year')?.touched">
+        <div *ngIf="form.get('building_year')?.touched && form.get('building_year')?.hasError('year')">
           <small class="dark:text-red-500"> fill your real building number.</small>
         </div>
       </div>
@@ -135,7 +135,7 @@
         <input
           class="no-resize appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500 h-21 resize-none"
           name="message" formControlName="address" type="text">
-        <div *ngIf="form.get('address')?.touched && form.get('address')?.hasError('required')">
+        <div *ngIf="form.get('address')?.touched && form.get('address')?.hasError('numeric')">
           <small class="dark:text-red-500"> fill your address.</small>
         </div>
       </div>
@@ -160,10 +160,15 @@
     </div>
   </div>
     <div class="md:flex md:items-center justify-between mt-8">
-      <div class="md:w-1/3">
-        <button type="submit" [disabled]="form.invalid" class="send-btn bg-teal-400 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-400 text-white font-semibold py-2 px-4 rounded">
+      <div class="md:w-2/3">
+        <button type="submit"    [class.disabled]="form.invalid" [disabled]="form.invalid" class="send-btn bg-teal-400 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-400 text-white font-semibold py-2 px-4 rounded">
           Send
         </button>
+        <a href="apartment-rent">
+          <button type="button" class="send-btn bg-cyan-800 hover:bg-cyan-800 focus:outline-none focus:ring-2 text-white font-semibold py-2 px-4 ml-2 rounded">
+            Return
+          </button>
+        </a>
         <button type="reset" (click)="onReset()" class="reset-btn bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-600 text-white font-semibold py-2 px-4 ml-2 rounded">
           Reset
         </button>

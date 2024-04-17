@@ -10,7 +10,34 @@
 html, body {
   background: #1c1f23;
 }
+.mb-3{
+  background-color: darkgrey;
+}
 
 nav.navbar.navbar-expand-lg.billboard-nav {
   background: #1A242F;
+}
+
+.btn-primary.btn{
+  background-color: green;
+  width: 100px;
+  height: 40px;
+}
+
+#about-us {
+  background-color: darkgrey;
+  margin-bottom: -50.1px;
+}
+#testimonial {
+  background: linear-gradient(270deg, #1A242F 0.01%, rgba(26, 36, 47, 0.00) 100%);
+  margin-bottom: -50.1px;
+}
+
+.bd-placeholder-img{
+  position: relative;
+  left: 100px;
+}
+
+.d-block {
+  max-width: 400px;
 }

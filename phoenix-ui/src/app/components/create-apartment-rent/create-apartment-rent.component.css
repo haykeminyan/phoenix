@@ -41,3 +41,9 @@ label.text-sm {
   --darkreader-bg--tw-bg-opacity: 1;
   background-color: rgba(131, 121, 107, 0.25);
 }
+
+.disabled {
+  background-color: #d3d3d3; /* Light gray background */
+  color: #a9a9a9; /* Light gray text color */
+  cursor: not-allowed; /* Show a "not-allowed" cursor */
+}

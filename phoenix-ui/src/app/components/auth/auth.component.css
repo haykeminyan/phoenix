@@ -1,3 +1,7 @@
-body, html {
+body, html{
   color: rgb(209, 205, 199);
+}
+.login100-form-logo {
+  background-color: rgb(24, 26, 27);
+  color: rgb(200, 195, 188);
 }
