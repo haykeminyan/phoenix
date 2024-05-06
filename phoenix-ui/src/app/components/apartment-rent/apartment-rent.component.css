@@ -1,138 +1,111 @@
 
 
-body, html {
-  background-color: #1c1f23;
-  color: rgb(209, 205, 199);
+/* Define animation for each unique trigger */
+@keyframes card-animation-1 {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-
-.example-h2 {
-  margin-left: 10px;
-  margin-right: 10px;
+/* Define animation for each unique trigger */
+@keyframes card-animation-2 {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.example-section {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  align-items: center;
-}
-
-.example-margin {
-  margin: 8px;
-}
-
-.example-width {
-  max-width: 180px;
-  width: 100%;
-}
-
-.mat-mdc-slider {
-  max-width: 300px;
-  width: 100%;
-}
-
-.mat-mdc-card + .mat-mdc-card {
-  margin-top: 8px;
-}
-
-.example-result-card h2 {
-  margin: 0 8px;
-}
-
-.example-label-container {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px 10px 0;
-  max-width: 284px;
-}
-
-.example-result-card .example-value-label {
-  font-weight: 600;
-}
-
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  width: 200px;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
+img, video {
   position: absolute;
-  right: 0;
-  background-color: darkgray;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+  max-width: 50% !important;
+  left: 500px !important;
+  right: 0 !important;
 }
 
-.dropdown-content.show {
-  display: block;
+.property-details {
+  list-style: none;
+  padding: 0;
 }
 
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
+.detail-item {
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1;}
-
-.dropdown:hover .dropdown-content {
-  display: block;
+.detail-item:last-child {
+  margin-bottom: 0;
 }
 
-.dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+
+.card-body {
+  padding: 20px;
 }
 
-mat-slider {
-  width: 300px;
-}
-button.btn {
-  margin-right: 10px;
-}
-
-.btn-warning {
-  width: 90px;
-  left: 10px;
-}
-.btn-info, .btn-warning{
-  max-width: 80px;
-  /*left: 10px;*/
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
 }
 
-#rentPriceFilter{
-  position: relative;
-  left: 20px;
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
 }
 
-#numberOfBedroomsFilter{
-  position: relative;
-  left: 40px;
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-.max-w-lg {
-  max-width: 80rem;
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
 }
-.swiper{
-  width: 85%; /* Set a specific width for the element */
-  margin: 0 auto;
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
-.btn-info{
-  width: 160px;
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
 }
-.dropbtn{
-  background-color: blueviolet;
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
 }

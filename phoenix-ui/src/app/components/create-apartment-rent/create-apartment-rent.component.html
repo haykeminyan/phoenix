@@ -15,7 +15,7 @@
 <html>
 
 <div class="flex justify-center items-center h-screen dark:bg-gray-900">
-  <form class="w-full max-w-lg bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8" [formGroup]="form" (ngSubmit)="onSubmit()">    <div class="grid grid-cols-3 gap-4">
+  <form class="w-full max-w-lg bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 grid grid-cols-3 gap-4" [formGroup]="form" (ngSubmit)="onSubmit()">
 
     <!-- Living Area -->
     <div class="flex flex-wrap -mx-3 mb-6 col-span-1">
@@ -140,8 +140,8 @@
         </div>
       </div>
     </div>
-
-    <div class="col-span-full">
+  </form>
+    <form class="col-span-full" [formGroup]="formFiles">
       <label class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label>
       <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
         <div class="text-center">
@@ -151,20 +151,20 @@
           <div class="mt-4 flex text-sm leading-6 text-gray-600">
             <label for="file-upload" class="relative cursor-pointer rounded-md font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
               <span>Upload a file</span>
-              <input id="file-upload" name="file-upload" type="file" class="sr-only" (change)="onFileChange($event)" formControlName="file">
+              <input id="file-upload" name="file-upload" type="file" class="sr-only" (change)="onFileChange($event)" formControlName="files">
             </label>
           </div>
           <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
         </div>
       </div>
-    </div>
-  </div>
+    </form>
+
     <div class="md:flex md:items-center justify-between mt-8">
       <div class="md:w-2/3">
         <button type="submit"    [class.disabled]="form.invalid" [disabled]="form.invalid" class="send-btn bg-teal-400 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-400 text-white font-semibold py-2 px-4 rounded">
           Send
         </button>
-        <a href="apartment-rent">
+        <a href="all-apartment-rent">
           <button type="button" class="send-btn bg-cyan-800 hover:bg-cyan-800 focus:outline-none focus:ring-2 text-white font-semibold py-2 px-4 ml-2 rounded">
             Return
           </button>
@@ -174,6 +174,6 @@
         </button>
       </div>
     </div>
-  </form>
 </div>
+
 </html>

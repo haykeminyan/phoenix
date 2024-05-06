@@ -25,19 +25,19 @@ export class ListingComponent implements OnInit{
     console.log(purposeValue)
     if (purposeValue === '1') {
       if (propertyValue == '1'){
-        this.router.navigateByUrl('/apartment-sale')
+        this.router.navigateByUrl('/all-apartment-sale')
       }
       else if (propertyValue == '2'){
-        this.router.navigateByUrl('/house-sale')
+        this.router.navigateByUrl('/all-house-sale')
       }
       // TODO
       // expand to other propertyType's
     } else if (purposeValue === '2') {
       if (propertyValue == '1'){
-        this.router.navigateByUrl('/apartment-rent')
+        this.router.navigateByUrl('/all-apartment-rent')
       }
       else if (propertyValue == '2'){
-        this.router.navigateByUrl('/house-rent')
+        this.router.navigateByUrl('/all-house-rent')
       }
     }
     else if (propertyValue === 'Type' && purposeValue == 'Purpose'){

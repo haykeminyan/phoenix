@@ -69,7 +69,11 @@ load_dotenv(os.path.join(BASE_DIR, '.env'))
 origins = [
     'http://127.0.0.1',
     'http://127.0.0.1:8000',
+    'http://localhost:8000',
+    'http://localhost:4200',
     'http://127.0.0.1:4200',
+    'http://192.168.65.1:4200',
+    'http://192.168.65.1:8000'
 ]
 
 
@@ -248,6 +252,7 @@ def create_app(env: str):
         raw_body = request.state.raw_body
         reject_bad_fields(raw_body, BAD_FIELDS_APARTMENT_RENT)
 
+        print('!'*1000)
         # Upload files
         uploaded_filenames = []
         await upload_image(files, uploaded_filenames, request)
@@ -344,7 +349,7 @@ def create_app(env: str):
         return get_apartment(sale_id, ApartmentSaleModel, db)
 
     @app.get(
-        '/apartment-sale/',
+        '/all-apartment-sale/',
         response_model=Page[ApartmentSaleSchema],
         status_code=status.HTTP_200_OK,
     )
@@ -363,7 +368,7 @@ def create_app(env: str):
         return paginate(db, query, params)
 
     @app.get(
-        '/apartment-rent/',
+        '/all-apartment-rent/',
         response_model=Page[ApartmentRentSchema],
         status_code=status.HTTP_200_OK,
     )

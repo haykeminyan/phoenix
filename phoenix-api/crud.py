@@ -1,3 +1,5 @@
+import re
+import uuid
 from typing import List
 
 import sentry_sdk
@@ -85,14 +87,17 @@ def fill_sale_apartment(apartment: ApartmentSaleSchema):
     return ApartmentSaleModel(**apartment.model_dump())
 
 
+# TODO need to add possibility uploading more than 1 picture
 async def upload_image(files: List[UploadFile], uploaded_filenames: List[str], request: Request):
     if files:
         for file in files:
             try:
                 # Read the file contents once and save it
                 contents = await file.read()
-
-                filename = f'templates/images/{file.filename}'
+                file.extension = re.search('(.\w+)$', str(file.filename)).group(1)
+                unique_filename = str(uuid.uuid4())
+                # file.filename = image_name
+                filename = f'templates/images/{unique_filename}{file.extension}'
                 with open(filename, 'wb') as f:
                     f.write(contents)
                 uploaded_filenames.append(filename)

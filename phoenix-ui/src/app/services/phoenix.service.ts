@@ -37,7 +37,7 @@ export class PhoenixService {
   }
 
   getListRent(params: { [key: string]: string | undefined }): Observable<HttpResponse<any>> {
-    let url = 'http://127.0.0.1:8000/apartment-rent';
+    let url = 'http://127.0.0.1:8000/all-apartment-rent';
 
     let queryParams = Object.entries(params)
       .filter(([_, value]) => value !== undefined && value!==null && value!=='0')
@@ -56,9 +56,28 @@ export class PhoenixService {
     const url = 'http://127.0.0.1:8000/apartment-rent';
     const formData = new FormData();
     formData.append('apartment', JSON.stringify(apartmentData));
+    console.log(file)
     if (file) {
       formData.append('files', file, file.name);
     }
     return this.http.post<HttpResponse<any>>(url, formData, { observe: 'response' })
+  }
+
+  viewApartment(id: string){
+    const url = `http://127.0.0.1:8000/apartment-rent/${id}`
+    return this.http.get<HttpResponse<any>>(url, { observe: 'response' })
+  }
+
+  editApartment(apartmentData: any, file: File | undefined, id: string | undefined): Observable<HttpResponse<HttpResponse<any>>> {
+    const url = `http://127.0.0.1:8000/apartment-rent/${id}`;
+    const formData = new FormData();
+    formData.append('apartment', JSON.stringify(apartmentData));
+    console.log(file)
+    if (file) {
+      formData.append('files', file, file.name);
+    }
+    console.log(file)
+    console.log(formData)
+    return this.http.put<HttpResponse<any>>(url, formData, { observe: 'response' })
   }
 }

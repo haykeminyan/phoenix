@@ -25,21 +25,28 @@ import {CommonModule, NgIf} from "@angular/common";
 export class CreateApartmentRentComponent implements OnInit{
   submitted = false
   form: FormGroup;
-  file: File | undefined ;
+  formFiles: FormGroup;
+  isAdd: boolean = true;
+  isEdit: boolean = false;
+  id: string | undefined;
+  files: File | undefined ;
   constructor(private service: PhoenixService,
               protected router: Router,) {
-
-      this.form = new FormGroup({
-        living_area: new FormControl('', [Validators.required, this.numericValidator]),
-        number_of_bedrooms: new FormControl(null, this.numericValidator),
-        number_of_bathrooms: new FormControl(null, this.numericValidator),
-        building_year: new FormControl(null, this.buildingYearValidator),
-        address: new FormControl('', Validators.required),
-        condition: new FormControl('good'),
-        energy_label: new FormControl('a_plus_plus'),
-        rent_price: new FormControl('', [Validators.required, this.numericValidator]),
-        file: new FormControl('')
+    this.form = new FormGroup({
+      living_area: new FormControl('', [Validators.required, this.numericValidator]),
+      number_of_bedrooms: new FormControl(null, this.numericValidator),
+      number_of_bathrooms: new FormControl(null, this.numericValidator),
+      building_year: new FormControl(null, this.buildingYearValidator),
+      address: new FormControl('', Validators.required),
+      condition: new FormControl('good'),
+      energy_label: new FormControl('a_plus_plus'),
+      rent_price: new FormControl('', [Validators.required, this.numericValidator]),
     })
+
+    this.formFiles = new FormGroup({
+      files: new FormControl(''),
+    })
+
   }
 
   numericValidator(control: AbstractControl): ValidationErrors | null {
@@ -89,11 +96,13 @@ export class CreateApartmentRentComponent implements OnInit{
     if (this.form.invalid) {
       return;
     }
-
-    this.service.createApartmentRent(this.form.value, this.file).subscribe({
+    this.files = this.formFiles.value.file;
+    console.log(this.files)
+    if (this.isAdd) {
+    this.service.createApartmentRent(this.form.value, this.files).subscribe({
         next: (result: any) => {
           alert('Congratulations! You have created dossier!')
-          this.router?.navigateByUrl('/apartment-rent')
+          this.router?.navigateByUrl('/all-apartment-rent')
         },
         complete: () => {
         },
@@ -101,18 +110,71 @@ export class CreateApartmentRentComponent implements OnInit{
           console.log(err)
         }
       }
-  )
+
+  )}
+    else{
+      this.service.editApartment(this.form.value, this.files, this.id).subscribe({
+        next: (result: any) => {
+          alert('Congratulations! You have edited dossier!')
+          this.router?.navigateByUrl('/all-apartment-rent')
+        },
+        complete: () => {
+        },
+        error: (err: any) => {
+          console.log(err)
+        }
+      })
+
+    }
   }
 
   ngOnInit(): void {
+    this.isEdit =  /\d+/.test(this.router.url)
+
+    if (this.isEdit){
+      this.id = this.router.url.split('rent/')[1]
+      this.isAdd = false
+      this.editApartment(this.id)
+    }
   }
+
+  editApartment(id: string){
+    this.service.viewApartment(id).subscribe(
+      response=>{
+        const response_api = (response.body as unknown as any)
+        console.log(response_api.image)
+
+        this.form.patchValue({
+          'living_area': response_api.living_area,
+          'number_of_bedrooms': response_api.number_of_bedrooms,
+          'number_of_bathrooms': response_api.number_of_bathrooms,
+          'rent_price': response_api.rent_price,
+          'building_year': response_api.building_year,
+          'address': response_api.address,
+        })
+        this.formFiles.patchValue({
+          'files': response_api.image
+        })
+        console.log(this.formFiles.value)
+        console.log(response.body)
+        console.log(response_api)
+        return response.body;
+      }
+    )
+  }
+
   onFileChange(event: any) {
     if (event.target.files && event.target.files.length > 0) {
       const file = event.target.files[0];
-      this.form.patchValue({
-        file: file
+      console.log(file)
+      this.formFiles.patchValue({
+        files: file.name
       });
+      console.log('!!!!!!')
+      console.log(this.formFiles.value)
+      console.log('!!!!!!')
     }
   }
+
 
 }

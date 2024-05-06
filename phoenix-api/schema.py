@@ -29,6 +29,7 @@ class Apartment(BaseModel):
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     address: str = Field(...)
+    # create new class and list[Image] | None = None
     image: Optional[str] = None
     owner_id: Optional[int] = Field(default=None, foreign_key='users.id')
 
