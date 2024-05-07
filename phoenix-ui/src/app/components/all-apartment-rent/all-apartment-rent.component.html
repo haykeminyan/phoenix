@@ -87,11 +87,18 @@
                 <div class="row">
                   <div class="col-md-4" *ngFor="let dossier of dossiers">
                     <div class="card">
-                      <img class="card-img-top" src="{{ 'http://127.0.0.1:8000/' + dossier.image.replace('{', '').replace('}', '') }}" alt="image">
+
                       <div class="card-body">
                         <ul class="list-unstyled">
+                          <carousel #carousel [interval]="0">
+                            <slide *ngFor="let image of JSON.parse(dossier.image)">
+                              <img [src]="image" alt="Slide {{image}}" >
+                            </slide>
+                          </carousel>
+                          <div class="button-container">
                           <li><a [routerLink]="['../apartment-rent', dossier.id]" class="btn btn-primary">View</a></li>
                           <li><a [routerLink]="['../create-edit-apartment-rent', dossier.id]" class="btn btn-info">Edit</a></li>
+                          </div>
                           <li *ngIf=dossier.id>id: {{dossier.id}}</li>
                           <li *ngIf=dossier.living_area>Living Area: {{dossier.living_area}} m2</li>
                           <li *ngIf=dossier.number_of_bedrooms>Bedrooms: {{dossier.number_of_bedrooms}}</li>
@@ -101,11 +108,14 @@
                           <li *ngIf=dossier.longitude>Longitude: {{dossier.longitude}}</li>
                           <li *ngIf=dossier.address>Address: {{dossier.address}}</li>
                           <li *ngIf=dossier.rent_price>Rent Price: {{dossier.rent_price}} EUR</li>
+                          <div class="container">
+                          </div>
+
+
                         </ul>
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
 
           </div>
@@ -236,7 +246,7 @@
 
 
 
-    <!--    </div>-->
+        </div>
 
   </div>
 </section>

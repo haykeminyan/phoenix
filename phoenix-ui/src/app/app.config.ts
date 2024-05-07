@@ -7,8 +7,14 @@ import {AuthComponent} from "./components/auth/auth.component";
 import {provideAnimations} from "@angular/platform-browser/animations";
 import {provideClientHydration} from "@angular/platform-browser";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {CarouselModule} from "ngx-bootstrap/carousel";
 
-export const appConfig: ApplicationConfig = {
+interface AppConfig extends ApplicationConfig {
+  imports: any[]; // Define the 'imports' property
+}
+
+export const appConfig: AppConfig = {
+  imports: [CarouselModule.forRoot(),],
   providers: [
     provideRouter(routes),
     provideClientHydration(),

@@ -6,13 +6,15 @@ import {MatSlider, MatSliderModule, MatSliderRangeThumb} from "@angular/material
 import {MatFormFieldModule, MatLabel} from "@angular/material/form-field";
 import {MatButton, MatButtonModule} from "@angular/material/button";
 import {MatInput, MatInputModule} from "@angular/material/input";
-import {BrowserModule} from "@angular/platform-browser";
+import {BrowserModule, HammerModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {CommonModule, NgForOf, NgIf} from "@angular/common";
+import {CommonModule, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {MatChipListbox, MatChipOption} from "@angular/material/chips";
 import {MatCardModule} from "@angular/material/card";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatOption, MatSelect} from "@angular/material/select";
+import {CarouselComponent, CarouselModule} from 'ngx-bootstrap/carousel';
+
 
 @Component({
   selector: 'app-all-apartment-rent',
@@ -37,11 +39,15 @@ import {MatOption, MatSelect} from "@angular/material/select";
     MatSelect,
     MatOption,
     NgIf,
+    CarouselModule,
+    NgOptimizedImage,
   ],
   styleUrls: ['./all-apartment-rent.component.css']
 })
 export class AllApartmentRentComponent implements OnInit {
+  @ViewChild('carousel') carousel!: CarouselComponent;
   dossiers: any[] = [];
+  dossiersCarousel: any[] = [];
   submitted: boolean = false;
   livingArea: string | undefined;
   livingAreaMin: string | undefined;
@@ -78,6 +84,22 @@ export class AllApartmentRentComponent implements OnInit {
     }, 100);
   }
 
+  //
+  // moveForward() {
+  //   const nextIndex = (this.carousel.activeSlide + 1)
+  //   this.carousel.selectSlide(nextIndex);
+  // }
+  //
+  // moveBackward() {
+  //   const prevIndex = (this.carousel.activeSlide - 1 )
+  //   this.carousel.selectSlide(prevIndex);
+  // }
+  //
+  // onSlide(event: any) {
+  //   // Handle slide event if needed
+  //   console.log('Slide event:', event);
+  // }
+
   initializeFilters() {
     this.params = {
       living_area: this.livingArea,
@@ -99,6 +121,8 @@ export class AllApartmentRentComponent implements OnInit {
     return `${value}`;
   }
 
+
+
   formatLabelRentPrice(value: number): string {
     if (value >= 10000) {
       return Math.round(value / 1000) + 'k';
@@ -107,7 +131,6 @@ export class AllApartmentRentComponent implements OnInit {
   }
 
   onFilterChange(filter: string) {
-    console.log(filter)
     switch (filter) {
       case 'livingArea':
         document.getElementById("livingAreaFilter")!.addEventListener("change",
@@ -149,7 +172,7 @@ export class AllApartmentRentComponent implements OnInit {
       default:
         break;
     }
-    this.list();
+    // this.list();
   }
 
   list() {
@@ -167,7 +190,8 @@ export class AllApartmentRentComponent implements OnInit {
           this.router.navigate(['']);
           alert('You are not authorized!');
         }
-      }
+      },
+
     });
   }
 
@@ -207,4 +231,5 @@ export class AllApartmentRentComponent implements OnInit {
   }
 
 
+  protected readonly JSON = JSON;
 }

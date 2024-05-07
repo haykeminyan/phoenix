@@ -136,3 +136,15 @@ button.btn {
 .dropbtn{
   background-color: blueviolet;
 }
+
+.button-container {
+  display: flex; /* Use flexbox layout */
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove padding */
+}
+
+/* Style for each button */
+.button-container li {
+  margin-right: 15px; /* Adjust margin between buttons */
+}
+
