@@ -1,3 +1,4 @@
+import json
 import os
 import re
 import time
@@ -24,7 +25,7 @@ from crud import (
 from db import SessionLocal, engine_prod
 from docx import Document
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, File, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi_filter import FilterDepends
@@ -58,6 +59,7 @@ from utils import hash_pass, verify_password
 
 from phoenix.admin import ApartmentRentAdmin, ApartmentSaleAdmin, UserAdmin
 from phoenix.auth import AdminAuth
+from phoenix.models import Apartment as ApartmentModel
 from phoenix.models import ApartmentRent as ApartmentRentModel
 from phoenix.models import ApartmentSale as ApartmentSaleModel
 from phoenix.models import User
@@ -245,14 +247,13 @@ def create_app(env: str):
     )
     async def create_apartment_rent(
         credentials: Annotated[HTTPBasicCredentials, Depends(security)],
-        apartment: ApartmentRentSchema,
         request: Request,
-        files: List[UploadFile] = File(None),
+        apartment: ApartmentRentSchema = Form(...),
+        files: list[UploadFile] = Form(None),
     ):
         raw_body = request.state.raw_body
         reject_bad_fields(raw_body, BAD_FIELDS_APARTMENT_RENT)
 
-        print('!'*1000)
         # Upload files
         uploaded_filenames = []
         await upload_image(files, uploaded_filenames, request)
@@ -264,12 +265,14 @@ def create_app(env: str):
         #     apartment.longitude = get_coordinates_throughout_address(apartment.address)[1]
 
         current_user = check_user_is_authenticated(credentials)
+
         # Fill apartment data
         db_apartment = fill_rent_apartment(apartment)
         db_apartment.owner_id = current_user['id']
 
         # Add image filenames to apartment
-        db_apartment.image = uploaded_filenames
+        db_apartment.image = json.dumps(uploaded_filenames)
+
         # Save apartment to database
         db.session.add(db_apartment)
         db.session.commit()

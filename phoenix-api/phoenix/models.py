@@ -1,6 +1,7 @@
 from datetime import date, datetime
 
 import pytz
+import json
 from sqlalchemy import (
     Boolean,
     Column,
@@ -10,7 +11,7 @@ from sqlalchemy import (
     Integer,
     String,
     Text,
-    Time,
+    Time, ARRAY,
 )
 from sqlalchemy.orm import declarative_base
 

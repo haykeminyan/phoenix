@@ -19,19 +19,19 @@ class UserOutput(BaseModel):
 
 
 class Apartment(BaseModel):
-    id: Optional[int] = Field(default=None)
+    id: int | None = Field(default=None)
     living_area: int
-    number_of_bedrooms: Optional[int] = None
-    number_of_bathrooms: Optional[int] = None
-    condition: Condition = Field(...)
-    energy_label: Optional[EnergyLabel] = None
-    building_year: Optional[int] = None
-    latitude: Optional[float] = None
-    longitude: Optional[float] = None
-    address: str = Field(...)
+    number_of_bedrooms: int | None = None
+    number_of_bathrooms:  int | None = None
+    condition: Condition
+    energy_label: EnergyLabel | None = None
+    building_year: int | None = None
+    latitude: float | None = None
+    longitude: float | None = None
+    address: str = Field(..., description="Address of the apartment")
     # create new class and list[Image] | None = None
-    image: Optional[str] = None
-    owner_id: Optional[int] = Field(default=None, foreign_key='users.id')
+    image: str | None = None
+    owner_id: int | None = Field(default=None, foreign_key='users.id')
 
     @model_validator(mode='before')
     @classmethod

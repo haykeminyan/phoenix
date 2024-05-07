@@ -88,7 +88,7 @@ def fill_sale_apartment(apartment: ApartmentSaleSchema):
 
 
 # TODO need to add possibility uploading more than 1 picture
-async def upload_image(files: List[UploadFile], uploaded_filenames: List[str], request: Request):
+async def upload_image(files: list[UploadFile], uploaded_filenames: list[str], request: Request):
     if files:
         for file in files:
             try:
@@ -100,13 +100,15 @@ async def upload_image(files: List[UploadFile], uploaded_filenames: List[str], r
                 filename = f'templates/images/{unique_filename}{file.extension}'
                 with open(filename, 'wb') as f:
                     f.write(contents)
-                uploaded_filenames.append(filename)
+                uploaded_filenames.append(f'http://127.0.0.1:8000/{filename}')
+                print(uploaded_filenames)
+                print('!'*100)
             except Exception:
                 return {'message': 'There was an error uploading the file(s)'}
     else:
         if 'apartment-rent' in str(request.url):
-            filename = 'templates/images/default/apartment-rent-default.jpg'
+            filename = 'http://127.0.0.1:8000/templates/images/default/apartment-rent-default.jpg'
             uploaded_filenames.append(filename)
         elif 'apartment-sale' in str(request.url):
-            filename = 'templates/images/default/apartment-sale-default.jpg'
+            filename = 'http://127.0.0.1:8000/templates/images/default/apartment-sale-default.jpg'
             uploaded_filenames.append(filename)
