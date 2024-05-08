@@ -230,6 +230,11 @@ export class AllApartmentRentComponent implements OnInit {
     this.list();
   }
 
+  delete(id: string){
+    this.service.deleteApartment(id).subscribe()
+    alert('You have successfully deleted dossier');
+    location.reload();
+  }
 
   protected readonly JSON = JSON;
 }

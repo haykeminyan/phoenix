@@ -1,19 +1,36 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residence</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="card-body dark: dark:bg-gray-900">
 <div class="card" [@cardAnimation]>
-  <img class="card-img-top" src="{{ 'http://127.0.0.1:8000/' + dossier.image.replace('{', '').replace('}', '') }}" alt="image">
-  <div class="card-body">
-    <ul class="list-unstyled">
-      <li *ngIf=dossier.living_area>Living Area: {{dossier.living_area}} m2</li>
-      <li *ngIf=dossier.number_of_bedrooms>Bedrooms: {{dossier.number_of_bedrooms}}</li>
-      <li *ngIf=dossier.number_of_bathrooms>Bathrooms: {{dossier.number_of_bathrooms}}</li>
-      <li *ngIf=dossier.condition>Condition: {{dossier.condition}}</li>
-      <li *ngIf=dossier.latitude>Latitude: {{dossier.latitude}}</li>
-      <li *ngIf=dossier.longitude>Longitude: {{dossier.longitude}}</li>
-      <li *ngIf=dossier.address>Address: {{dossier.address}}</li>
-      <li *ngIf=dossier.rent_price>Rent Price: {{dossier.rent_price}} EUR</li>
-    </ul>
+  <div class="card-body dark: dark:bg-gray-900">
+    <carousel #carousel [interval]="0">
+      <slide *ngFor="let image of JSON.parse(dossier.image)">
+        <img [src]="image" alt="Slide {{image}}" >
+      </slide>
+    </carousel>
+    <div class="card-body">
+      <ul class="list-unstyled">
+        <li *ngIf=dossier.living_area>Living Area: {{dossier.living_area}} m2</li>
+        <li *ngIf=dossier.number_of_bedrooms>Bedrooms: {{dossier.number_of_bedrooms}}</li>
+        <li *ngIf=dossier.number_of_bathrooms>Bathrooms: {{dossier.number_of_bathrooms}}</li>
+        <li *ngIf=dossier.condition>Condition: {{dossier.condition}}</li>
+        <li *ngIf=dossier.latitude>Latitude: {{dossier.latitude}}</li>
+        <li *ngIf=dossier.longitude>Longitude: {{dossier.longitude}}</li>
+        <li *ngIf=dossier.address>Address: {{dossier.address}}</li>
+        <li *ngIf=dossier.rent_price>Rent Price: {{dossier.rent_price}} EUR</li>
+      </ul>
+    </div>
+</div>
+  <div class="button-container">
+<a [routerLink]="['../../create-edit-apartment-rent', dossier.id]" class="btn btn-info">Edit</a>
+  <div class="btn btn-danger" (click)="delete(dossier.id)">Delete</div>
   </div>
 </div>
+</body>
+</html>

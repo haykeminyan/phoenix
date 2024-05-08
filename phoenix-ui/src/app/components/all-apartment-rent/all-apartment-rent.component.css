@@ -109,7 +109,7 @@ button.btn {
   left: 10px;
 }
 .btn-info, .btn-warning{
-  max-width: 80px;
+  max-width: 70px;
   /*left: 10px;*/
 }
 
@@ -131,7 +131,7 @@ button.btn {
   margin: 0 auto;
 }
 .btn-info{
-  width: 160px;
+  width: 150px;
 }
 .dropbtn{
   background-color: blueviolet;

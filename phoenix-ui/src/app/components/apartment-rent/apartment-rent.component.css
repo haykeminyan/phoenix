@@ -13,10 +13,21 @@
 }
 
 img, video {
-  position: absolute;
-  max-width: 50% !important;
-  left: 500px !important;
-  right: 0 !important;
+  max-width: 30%;
+  max-height: 20%;
+  margin: 0 auto 0 auto;
+}
+
+div.btn {
+  position: relative;
+  left: 10px;
+}
+.card-body {
+  color: antiquewhite;
+}
+.btn {
+  position: relative;
+  max-width: 10%;
 }
 
 .property-details {

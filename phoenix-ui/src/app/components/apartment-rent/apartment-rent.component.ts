@@ -1,16 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PhoenixService} from "../../services/phoenix.service";
 import {Router, RouterLink} from "@angular/router";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {animate, keyframes, style, transition, trigger} from "@angular/animations";
+import {CarouselComponent, CarouselModule} from 'ngx-bootstrap/carousel';
 
 @Component({
   selector: 'app-apartment-rent',
   standalone: true,
-  imports: [
-    RouterLink,
-    NgIf
-  ],
+    imports: [
+        RouterLink,
+        NgIf,
+        CarouselModule,
+        NgForOf,
+
+    ],
   templateUrl: './apartment-rent.component.html',
   styleUrl: './apartment-rent.component.css',
   animations: [
@@ -23,6 +27,7 @@ import {animate, keyframes, style, transition, trigger} from "@angular/animation
   ]
 })
 export class ApartmentRentComponent implements OnInit{
+  @ViewChild('carousel') carousel!: CarouselComponent;
   idApartment!: string
   dossier: any | undefined
   ngOnInit(): void {
@@ -36,6 +41,7 @@ export class ApartmentRentComponent implements OnInit{
     this.service.viewApartment(this.idApartment).subscribe({
       next: (result: any) => {
         this.dossier = (result.body as unknown as any)
+        console.log(this.dossier.image)
     },
       complete: () => {
     },
@@ -45,4 +51,11 @@ export class ApartmentRentComponent implements OnInit{
   })
   }
 
+  delete(id: string){
+    this.service.deleteApartment(id).subscribe()
+    alert('You have successfully deleted dossier');
+    this.router.navigateByUrl('/all-apartment-rent')
+  }
+
+    protected readonly JSON = JSON;
 }

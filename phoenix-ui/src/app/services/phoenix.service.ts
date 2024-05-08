@@ -68,6 +68,11 @@ export class PhoenixService {
     return this.http.get<HttpResponse<any>>(url, { observe: 'response' })
   }
 
+  deleteApartment(id: string){
+    const url = `http://127.0.0.1:8000/apartment-rent/${id}`
+    return this.http.delete<HttpResponse<any>>(url, { observe: 'response' })
+  }
+
   editApartment(apartmentData: any, file: File | undefined, id: string | undefined): Observable<HttpResponse<HttpResponse<any>>> {
     const url = `http://127.0.0.1:8000/apartment-rent/${id}`;
     const formData = new FormData();
