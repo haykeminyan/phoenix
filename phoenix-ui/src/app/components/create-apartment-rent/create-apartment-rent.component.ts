@@ -10,6 +10,7 @@ import {
 import {PhoenixService} from "../../services/phoenix.service";
 import {Router} from "@angular/router";
 import {CommonModule, NgIf} from "@angular/common";
+import {v4 as uuidv4} from "uuid";
 
 @Component({
   selector: 'app-create-apartment-rent',
@@ -29,7 +30,7 @@ export class CreateApartmentRentComponent implements OnInit{
   isAdd: boolean = true;
   isEdit: boolean = false;
   id: string | undefined;
-  files: File | undefined ;
+  files!: File ;
   constructor(private service: PhoenixService,
               protected router: Router,) {
     this.form = new FormGroup({
@@ -96,8 +97,8 @@ export class CreateApartmentRentComponent implements OnInit{
     if (this.form.invalid) {
       return;
     }
-    this.files = this.formFiles.value.file;
-    console.log(this.files)
+    this.files = this.formFiles.value.files; // Get the file
+
     if (this.isAdd) {
     this.service.createApartmentRent(this.form.value, this.files).subscribe({
         next: (result: any) => {
@@ -113,6 +114,10 @@ export class CreateApartmentRentComponent implements OnInit{
 
   )}
     else{
+      const extension = String(this.files).substring(String(this.files).lastIndexOf('.') + 1); // Extract file extension
+      const newFileName = `${uuidv4()}.${extension}`; // Generate new file name with UUID
+      this.files = new File([this.files], newFileName); // Create a new File object with the updated file name
+
       this.service.editApartment(this.form.value, this.files, this.id).subscribe({
         next: (result: any) => {
           alert('Congratulations! You have edited dossier!')
@@ -142,7 +147,7 @@ export class CreateApartmentRentComponent implements OnInit{
     this.service.viewApartment(id).subscribe(
       response=>{
         const response_api = (response.body as unknown as any)
-        console.log(response_api.image)
+        console.log(response_api)
 
         this.form.patchValue({
           'living_area': response_api.living_area,

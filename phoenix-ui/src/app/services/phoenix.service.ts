@@ -4,6 +4,8 @@ import {
 } from "@angular/common/http";
 import {Observable} from "rxjs";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export const cred ={
   username: 'username',
@@ -56,9 +58,10 @@ export class PhoenixService {
     const url = 'http://127.0.0.1:8000/apartment-rent';
     const formData = new FormData();
     formData.append('apartment', JSON.stringify(apartmentData));
+    const fileInput = (document.getElementById('fileInput') as HTMLInputElement)
     console.log(file)
-    if (file) {
-      formData.append('files', file, file.name);
+    for (const elem of Object(fileInput!.files)) {
+      formData.append('files',elem)
     }
     return this.http.post<HttpResponse<any>>(url, formData, { observe: 'response' })
   }
@@ -73,16 +76,20 @@ export class PhoenixService {
     return this.http.delete<HttpResponse<any>>(url, { observe: 'response' })
   }
 
-  editApartment(apartmentData: any, file: File | undefined, id: string | undefined): Observable<HttpResponse<HttpResponse<any>>> {
+  editApartment(apartmentData: any, file: File , id: string | undefined): Observable<HttpResponse<HttpResponse<any>>> {
     const url = `http://127.0.0.1:8000/apartment-rent/${id}`;
+    const fileInput = (document.getElementById('fileInput') as HTMLInputElement)
+    const HttpUploadOptions = {
+      headers: new HttpHeaders({ "Content-Type": "multipart/form-data"})
+    }
     const formData = new FormData();
     formData.append('apartment', JSON.stringify(apartmentData));
-    console.log(file)
-    if (file) {
-      formData.append('files', file, file.name);
+    console.log(fileInput.files)
+    for (const elem of Object(fileInput!.files)) {
+      formData.append('files',elem)
     }
     console.log(file)
     console.log(formData)
-    return this.http.put<HttpResponse<any>>(url, formData, { observe: 'response' })
+    return this.http.put<HttpResponse<any>>(url, formData, HttpUploadOptions)
   }
 }

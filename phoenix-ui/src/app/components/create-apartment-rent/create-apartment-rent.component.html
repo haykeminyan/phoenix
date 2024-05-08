@@ -15,7 +15,7 @@
 <html>
 
 <div class="flex justify-center items-center h-screen dark:bg-gray-900">
-  <form class="w-full max-w-lg bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 grid grid-cols-3 gap-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form class="w-full max-w-lg bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8" [formGroup]="form" (ngSubmit)="onSubmit()">    <div class="grid grid-cols-3 gap-4">
 
     <!-- Living Area -->
     <div class="flex flex-wrap -mx-3 mb-6 col-span-1">
@@ -29,7 +29,7 @@
           class="appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500"
           type="number"
         />
-        <div *ngIf="form.get('living_area')?.touched && form.get('living_area')?.hasError('numeric')">
+        <div *ngIf="form.get('living_area')?.touched && form.get('living_area')?.hasError('required')">
           <small class="dark:text-red-500">Fill your living area (m²).</small>
         </div>
       </div>
@@ -42,7 +42,7 @@
           Number of Bathrooms
         </label>
         <input formControlName="number_of_bathrooms" name="number_of_bathrooms" class="appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500" type="number">
-        <div *ngIf="form.get('number_of_bathrooms')?.touched && form.get('number_of_bathrooms')?.hasError('numeric')">
+        <div *ngIf="form.get('number_of_bathrooms')?.touched">
           <small class="dark:text-red-500"> fill your real number.</small>
         </div>
       </div>
@@ -55,7 +55,7 @@
           Number of Bedrooms
         </label>
         <input formControlName="number_of_bedrooms" name="number_of_bedrooms" class="appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500" type="number">
-        <div *ngIf="form.get('number_of_bedrooms')?.touched && form.get('number_of_bedrooms')?.hasError('numeric')">
+        <div *ngIf="form.get('number_of_bedrooms')?.touched && form.get('number_of_bedrooms')?.hasError('type')">
           <small class="dark:text-red-500"> fill your real number.</small>
         </div>
       </div>
@@ -68,7 +68,7 @@
           Rent price
         </label>
         <input formControlName="rent_price" name="rent_price" class="appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500" type="number">
-        <div *ngIf="form.get('rent_price')?.touched && form.get('rent_price')?.hasError('numeric')">
+        <div *ngIf="form.get('rent_price')?.touched && form.get('rent_price')?.hasError('required')">
           <small class="dark:text-red-500"> fill your real rent price (€).</small>
         </div>
       </div>
@@ -81,7 +81,7 @@
           Building Year
         </label>
         <input formControlName="building_year" name="building_year" class="appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500" type="number">
-        <div *ngIf="form.get('building_year')?.touched && form.get('building_year')?.hasError('year')">
+        <div *ngIf="form.get('building_year')?.touched">
           <small class="dark:text-red-500"> fill your real building number.</small>
         </div>
       </div>
@@ -105,24 +105,24 @@
     </div>
 
     <!-- Energy label -->
-      <div class="flex flex-wrap -mx-3 mb-6 col-span-1">
-        <div class="w-full px-3">
-          <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
-            Energy Label
-          </label>
-          <div class="relative">
-            <select formControlName="energy_label" name="energy_label" class="appearance-none block w-full bg-gray-200 dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-700 focus:border-gray-500 dark:focus:border-gray-500">
-              <option value="a_plus_plus">A++</option>
-              <option value="a_plus">A+</option>
-              <option value="a">A</option>
-              <option value="b">B</option>
-              <option value="c">C</option>
-              <option value="d">D</option>
-              <option value="e">E</option>
-            </select>
-          </div>
+    <div class="flex flex-wrap -mx-3 mb-6 col-span-1">
+      <div class="w-full px-3">
+        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          Energy Label
+        </label>
+        <div class="relative">
+          <select formControlName="energy_label" name="energy_label" class="appearance-none block w-full bg-gray-200 dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 dark:focus:bg-gray-700 focus:border-gray-500 dark:focus:border-gray-500">
+            <option value="a_plus_plus">A++</option>
+            <option value="a_plus">A+</option>
+            <option value="a">A</option>
+            <option value="b">B</option>
+            <option value="c">C</option>
+            <option value="d">D</option>
+            <option value="e">E</option>
+          </select>
         </div>
       </div>
+    </div>
 
 
 
@@ -135,13 +135,13 @@
         <input
           class="no-resize appearance-none block w-full dark:bg-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded py-3 px-2 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-gray-500 h-21 resize-none"
           name="message" formControlName="address" type="text">
-        <div *ngIf="form.get('address')?.touched && form.get('address')?.hasError('numeric')">
+        <div *ngIf="form.get('address')?.touched && form.get('address')?.hasError('required')">
           <small class="dark:text-red-500"> fill your address.</small>
         </div>
       </div>
     </div>
-  </form>
-    <form class="col-span-full" [formGroup]="formFiles">
+
+    <div class="col-span-full">
       <label class="block text-sm font-medium leading-6 text-gray-900">Cover photo</label>
       <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
         <div class="text-center">
@@ -149,31 +149,27 @@
             <path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 012.25-2.25h16.5A2.25 2.25 0 0122.5 6v12a2.25 2.25 0 01-2.25 2.25H3.75A2.25 2.25 0 011.5 18V6zM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0021 18v-1.94l-2.69-2.689a1.5 1.5 0 00-2.12 0l-.88.879.97.97a.75.75 0 11-1.06 1.06l-5.16-5.159a1.5 1.5 0 00-2.12 0L3 16.061zm10.125-7.81a1.125 1.125 0 112.25 0 1.125 1.125 0 01-2.25 0z" clip-rule="evenodd" />
           </svg>
           <div class="mt-4 flex text-sm leading-6 text-gray-600">
-            <label for="file-upload" class="relative cursor-pointer rounded-md font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
+            <label for="fileInput" class="relative cursor-pointer rounded-md font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500">
               <span>Upload a file</span>
-              <input id="file-upload" name="file-upload" type="file" class="sr-only" (change)="onFileChange($event)" formControlName="files">
+              <input id="fileInput" name="file-upload" type="file" class="sr-only" multiple (change)="onFileChange($event)">
             </label>
+
           </div>
           <p class="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
         </div>
       </div>
-    </form>
-
+    </div>
+  </div>
     <div class="md:flex md:items-center justify-between mt-8">
-      <div class="md:w-2/3">
-        <button type="submit"    [class.disabled]="form.invalid" [disabled]="form.invalid" class="send-btn bg-teal-400 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-400 text-white font-semibold py-2 px-4 rounded">
+      <div class="md:w-1/3">
+        <button type="submit" [disabled]="form.invalid" class="send-btn bg-teal-400 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-400 text-white font-semibold py-2 px-4 rounded">
           Send
         </button>
-        <a href="all-apartment-rent">
-          <button type="button" class="send-btn bg-cyan-800 hover:bg-cyan-800 focus:outline-none focus:ring-2 text-white font-semibold py-2 px-4 ml-2 rounded">
-            Return
-          </button>
-        </a>
         <button type="reset" (click)="onReset()" class="reset-btn bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-600 text-white font-semibold py-2 px-4 ml-2 rounded">
           Reset
         </button>
       </div>
     </div>
+  </form>
 </div>
-
 </html>
