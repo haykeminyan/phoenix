@@ -232,7 +232,7 @@ def create_app(env: str):
         db_apartment.owner_id = current_user['id']
 
         # Add image filenames to apartment
-        db_apartment.image = uploaded_filenames
+        db_apartment.image = json.dumps(uploaded_filenames)
 
         # Save apartment to database
         db.session.add(db_apartment)
@@ -298,7 +298,10 @@ def create_app(env: str):
         uploaded_filenames = []
         await upload_image(files, uploaded_filenames, request)
         db_apartment = update_apartment(ApartmentRentModel, rent_id, apartment, db)
-        db_apartment.image = uploaded_filenames
+        # Add image filenames to apartment
+        db_apartment.image = json.dumps(uploaded_filenames)
+        print('!'*1000)
+        print(db_apartment)
         db.add(db_apartment)
         db.commit()
         return db_apartment
@@ -320,7 +323,10 @@ def create_app(env: str):
         uploaded_filenames = []
         await upload_image(files, uploaded_filenames, request)
         db_apartment = update_apartment(ApartmentSaleModel, sale_id, apartment, db)
-        db_apartment.image = uploaded_filenames
+        # Add image filenames to apartment
+        db_apartment.image = json.dumps(uploaded_filenames)
+        print('!'*1000)
+        print(db_apartment)
         db.add(db_apartment)
         db.commit()
         return db_apartment
