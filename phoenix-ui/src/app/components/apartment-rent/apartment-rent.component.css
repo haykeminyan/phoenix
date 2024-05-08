@@ -18,6 +18,11 @@ img, video {
   margin: 0 auto 0 auto;
 }
 
+a.btn:nth-child(1) {
+  position: relative;
+  right: 10px;
+}
+
 div.btn {
   position: relative;
   left: 10px;

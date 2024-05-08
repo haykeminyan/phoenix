@@ -28,6 +28,7 @@
     </div>
 </div>
   <div class="button-container">
+    <a [routerLink]="['../../all-apartment-rent']" class="btn btn-primary">Return</a>
 <a [routerLink]="['../../create-edit-apartment-rent', dossier.id]" class="btn btn-info">Edit</a>
   <div class="btn btn-danger" (click)="delete(dossier.id)">Delete</div>
   </div>
