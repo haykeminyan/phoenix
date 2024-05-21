@@ -8,7 +8,7 @@ FastAPI-SQLAlchemy==0.2.1
 fastapi-pagination==0.12.14
 sqladmin==0.16.0
 itsdangerous==2.1.2
-requests==2.31.0
+requests==2.32.0
 fastapi-jwt==0.2.0
 passlib==1.7.4
 python-jose==3.3.0
